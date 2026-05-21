@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>BLAZO — Tech Consulting for Southern California</title>
+<meta name="description" content="BLAZO helps Southern California small businesses stop losing leads, time, and money — through web design, automation, and full tech consulting." />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --blaze:   #FF4D00;
+  --blaze2:  #FF8C00;
+  --dark:    #080808;
+  --dark2:   #0f0f0f;
+  --dark3:   #181818;
+  --dark4:   #1e1e1e;
+  --light:   #f0ede8;
+  --muted:   rgba(240,237,232,0.45);
+  --muted2:  rgba(240,237,232,0.25);
+  --border:  rgba(240,237,232,0.08);
+  --border2: rgba(240,237,232,0.14);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--dark);
+  color: var(--light);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+/* ── SCROLL ANIMATIONS ───────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ── NAV ─────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 20px 48px;
+  background: rgba(8,8,8,0.9);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  transition: padding 0.3s;
+}
+nav.scrolled { padding: 14px 48px; }
+
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: 0.08em;
+  color: var(--light);
+  text-decoration: none;
+  z-index: 201;
+}
+.nav-logo span { color: var(--blaze); }
+
+.nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--light); }
+
+.nav-cta {
+  padding: 9px 20px !important;
+  background: var(--blaze) !important;
+  color: #fff !important;
+  border-radius: 6px;
+  font-weight: 600 !important;
+  transition: opacity 0.2s !important;
+}
+.nav-cta:hover { opacity: 0.85 !important; color: #fff !important; }
+
+/* Mobile hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  z-index: 201;
+  padding: 4px;
+  background: none;
+  border: none;
+}
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--light);
+  border-radius: 2px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--dark);
+  z-index: 199;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-family: 'Syne', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--light);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.mobile-menu a:hover { color: var(--blaze); }
+.mobile-menu .mobile-cta {
+  padding: 14px 36px;
+  background: var(--blaze);
+  border-radius: 6px;
+  font-size: 18px !important;
+  color: #fff !important;
+}
+
+/* ── HERO ─────────────────────────────────────────── */
+#home {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 140px 48px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 65% 55% at 72% 38%, rgba(255,77,0,0.13) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 18% 80%, rgba(255,140,0,0.06) 0%, transparent 60%);
+}
+
+.hero-grid {
+  position: absolute; inset: 0; z-index: 0; opacity: 0.035;
+  background-image:
+    linear-gradient(rgba(240,237,232,0.5) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(240,237,232,0.5) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+.hero-content { position: relative; z-index: 1; max-width: 920px; }
+
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 14px;
+  border: 1px solid rgba(255,77,0,0.35);
+  border-radius: 100px;
+  color: var(--blaze2);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  animation: fadeUp 0.8s ease both;
+}
+.hero-tag::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--blaze);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.75); }
+}
+
+h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(48px, 8vw, 96px);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.025em;
+  margin-bottom: 28px;
+  animation: fadeUp 0.8s 0.1s ease both;
+}
+h1 .accent { color: var(--blaze); }
+
+.hero-sub {
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--muted);
+  max-width: 520px;
+  margin-bottom: 44px;
+  font-weight: 300;
+  animation: fadeUp 0.8s 0.2s ease both;
+}
+
+.hero-actions {
+  display: flex; gap: 16px; align-items: center; flex-wrap: wrap;
+  animation: fadeUp 0.8s 0.3s ease both;
+}
+
+.btn-primary {
+  padding: 16px 32px;
+  background: var(--blaze);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-family: 'Syne', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 0 40px rgba(255,77,0,0.28);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 64px rgba(255,77,0,0.42);
+}
+
+.btn-secondary {
+  padding: 16px 32px;
+  background: transparent;
+  color: var(--light);
+  border: 1px solid var(--border2);
+  border-radius: 6px;
+  font-family: 'Syne', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: border-color 0.2s;
+}
+.btn-secondary:hover { border-color: rgba(240,237,232,0.35); }
+
+.hero-stats {
+  display: flex; gap: 56px; margin-top: 72px; flex-wrap: wrap;
+  animation: fadeUp 0.8s 0.4s ease both;
+  padding-top: 40px;
+  border-top: 1px solid var(--border);
+}
+.stat-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 38px;
+  font-weight: 800;
+  color: var(--light);
+  line-height: 1;
+}
+.stat-num span { color: var(--blaze); }
+.stat-label { color: var(--muted); font-size: 13px; margin-top: 6px; }
+
+/* ── MARQUEE ──────────────────────────────────────── */
+.marquee-section {
+  padding: 18px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+  background: var(--dark2);
+}
+.marquee-track {
+  display: flex;
+  animation: marquee 22s linear infinite;
+  white-space: nowrap;
+}
+.marquee-item {
+  display: inline-flex; align-items: center; gap: 16px;
+  padding: 0 40px;
+  font-family: 'Syne', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.marquee-dot { color: var(--blaze); font-size: 16px; }
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── SECTIONS COMMON ─────────────────────────────── */
+section { padding: 100px 48px; }
+
+.section-label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blaze);
+  margin-bottom: 16px;
+}
+
+h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(34px, 5vw, 54px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+
+.section-sub {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 500px;
+  font-weight: 300;
+}
+
+/* ── SERVICES ─────────────────────────────────────── */
+#services { background: var(--dark2); }
+
+.services-header {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: 56px; gap: 40px; flex-wrap: wrap;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2px;
+}
+
+.service-card {
+  background: var(--dark3);
+  padding: 40px 36px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s;
+}
+.service-card:hover { background: var(--dark4); }
+.service-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--blaze), var(--blaze2));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+.service-card:hover::before { transform: scaleX(1); }
+
+.service-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 11px; font-weight: 700;
+  color: var(--blaze); letter-spacing: 0.1em;
+  margin-bottom: 24px;
+}
+.service-icon { font-size: 30px; margin-bottom: 18px; display: block; }
+.service-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 21px; font-weight: 700;
+  margin-bottom: 12px; color: var(--light);
+}
+.service-desc {
+  font-size: 14px; line-height: 1.75; color: var(--muted);
+}
+.service-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 24px; }
+.service-tag {
+  padding: 4px 10px;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  font-size: 11px; color: var(--muted);
+}
+
+/* ── CASE STUDY ───────────────────────────────────── */
+#case-study { background: var(--dark); }
+
+.case-study-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.case-study-label {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 5px 12px;
+  background: rgba(255,77,0,0.08);
+  border: 1px solid rgba(255,77,0,0.2);
+  border-radius: 100px;
+  font-size: 11px; font-weight: 600;
+  color: var(--blaze2); letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.case-study-content p {
+  font-size: 16px; line-height: 1.8; color: var(--muted);
+  font-weight: 300; margin-bottom: 14px;
+}
+
+.case-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-top: 12px;
+}
+
+.metric-box {
+  background: var(--dark2);
+  padding: 28px 24px;
+  border: 1px solid var(--border);
+}
+.metric-box:first-child { border-top-left-radius: 8px; }
+.metric-box:nth-child(2) { border-top-right-radius: 8px; }
+.metric-box:nth-child(3) { border-bottom-left-radius: 8px; }
+.metric-box:last-child { border-bottom-right-radius: 8px; }
+
+.metric-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 36px; font-weight: 800;
+  color: var(--light); line-height: 1;
+}
+.metric-num span { color: var(--blaze); }
+.metric-desc { font-size: 13px; color: var(--muted); margin-top: 6px; line-height: 1.5; }
+
+.case-visual {
+  background: var(--dark2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 36px;
+  position: relative;
+  overflow: hidden;
+}
+.case-visual::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(255,77,0,0.12) 0%, transparent 70%);
+}
+
+.flow-step {
+  display: flex; align-items: flex-start; gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+  position: relative; z-index: 1;
+}
+.flow-step:last-child { border-bottom: none; }
+.flow-step-icon {
+  width: 36px; height: 36px;
+  background: rgba(255,77,0,0.1);
+  border: 1px solid rgba(255,77,0,0.2);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+}
+.flow-step-label {
+  font-size: 11px; font-weight: 600;
+  color: var(--blaze); letter-spacing: 0.08em;
+  text-transform: uppercase; margin-bottom: 4px;
+}
+.flow-step-desc { font-size: 14px; color: var(--muted); line-height: 1.5; }
+
+.flow-connector {
+  width: 2px; height: 16px;
+  background: var(--border);
+  margin-left: 17px;
+}
+
+/* ── PROCESS ──────────────────────────────────────── */
+.process-section { background: var(--dark2); padding: 100px 48px; }
+
+.process-header { text-align: center; margin-bottom: 64px; }
+.process-header .section-sub { margin: 0 auto; }
+
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 0;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.process-step {
+  padding: 36px 32px;
+  border-left: 1px solid var(--border);
+  position: relative;
+}
+.process-step:first-child { border-left: none; }
+.step-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 52px; font-weight: 800;
+  color: rgba(255,77,0,0.14);
+  margin-bottom: 16px; line-height: 1;
+}
+.step-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 17px; font-weight: 700;
+  color: var(--light); margin-bottom: 10px;
+}
+.step-desc { font-size: 14px; line-height: 1.7; color: var(--muted); }
+
+/* ── ABOUT ────────────────────────────────────────── */
+#about {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  background: var(--dark2);
+}
+
+.about-visual {
+  position: relative;
+  aspect-ratio: 1;
+  max-width: 480px;
+}
+.about-box {
+  position: absolute;
+  border-radius: 4px;
+}
+.about-box-main {
+  inset: 0;
+  background: var(--dark3);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-size: 112px; font-weight: 800;
+  color: rgba(255,77,0,0.07);
+  letter-spacing: -0.04em;
+  overflow: hidden;
+  user-select: none;
+}
+.about-box-accent {
+  width: 140px; height: 140px;
+  bottom: -20px; right: -20px;
+  background: linear-gradient(135deg, var(--blaze), var(--blaze2));
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-size: 13px; font-weight: 700;
+  color: #fff; text-align: center;
+  line-height: 1.4; padding: 16px;
+}
+.about-badge {
+  position: absolute; top: -16px; left: -16px;
+  background: var(--dark);
+  border: 1px solid var(--border2);
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-size: 13px; color: var(--light);
+}
+.about-badge strong {
+  display: block;
+  font-family: 'Syne', sans-serif;
+  font-size: 22px; font-weight: 800; color: var(--blaze);
+}
+
+.about-content h2 { margin-bottom: 24px; }
+.about-text {
+  font-size: 16px; line-height: 1.8;
+  color: var(--muted); margin-bottom: 16px; font-weight: 300;
+}
+.about-list {
+  list-style: none; margin: 28px 0;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.about-list li {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 15px; color: var(--light);
+}
+.about-list li::before {
+  content: '';
+  width: 20px; height: 2px;
+  background: var(--blaze); flex-shrink: 0;
+}
+
+/* ── CONTACT ──────────────────────────────────────── */
+#contact {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+  background: var(--dark2);
+}
+
+.contact-info h2 { margin-bottom: 20px; }
+.contact-methods {
+  margin-top: 40px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.contact-method {
+  display: flex; align-items: center; gap: 16px;
+  padding: 18px 22px;
+  background: var(--dark3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: border-color 0.2s;
+}
+.contact-method:hover { border-color: rgba(255,77,0,0.3); }
+.contact-method-icon {
+  width: 38px; height: 38px;
+  background: rgba(255,77,0,0.1);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+}
+.contact-method-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 2px; }
+.contact-method-value { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 600; color: var(--light); }
+
+.contact-form {
+  background: var(--dark3);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 40px;
+}
+.form-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px; font-weight: 700; margin-bottom: 4px;
+}
+.form-sub { font-size: 14px; color: var(--muted); margin-bottom: 28px; }
+.form-group { margin-bottom: 16px; }
+.form-group label {
+  display: block;
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 8px;
+}
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--dark);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--light);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus { border-color: rgba(255,77,0,0.45); }
+.form-group textarea { resize: vertical; min-height: 100px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+.submit-btn {
+  width: 100%; padding: 15px;
+  background: var(--blaze); color: #fff;
+  border: none; border-radius: 6px;
+  font-family: 'Syne', sans-serif;
+  font-size: 15px; font-weight: 700;
+  letter-spacing: 0.03em; cursor: pointer;
+  margin-top: 8px;
+  transition: opacity 0.2s, transform 0.2s;
+  box-shadow: 0 0 40px rgba(255,77,0,0.22);
+}
+.submit-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+.submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+.form-success {
+  display: none;
+  padding: 20px;
+  background: rgba(0,200,100,0.08);
+  border: 1px solid rgba(0,200,100,0.2);
+  border-radius: 8px;
+  color: #4ade80;
+  font-size: 14px;
+  line-height: 1.6;
+  text-align: center;
+  margin-top: 12px;
+}
+
+/* ── FOOTER ───────────────────────────────────────── */
+footer {
+  padding: 40px 48px;
+  border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 20px;
+  background: var(--dark);
+}
+.footer-logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 18px; font-weight: 800; letter-spacing: 0.08em;
+}
+.footer-logo span { color: var(--blaze); }
+.footer-copy { color: var(--muted2); font-size: 13px; }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a {
+  color: var(--muted); text-decoration: none; font-size: 13px;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--light); }
+
+/* ── ANIMATIONS ───────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── RESPONSIVE ───────────────────────────────────── */
+@media (max-width: 900px) {
+  nav { padding: 18px 24px; }
+  nav.scrolled { padding: 14px 24px; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+
+  section,
+  .process-section { padding: 72px 24px; }
+  #home { padding: 120px 24px 60px; }
+  #about, #contact { grid-template-columns: 1fr; gap: 48px; padding: 72px 24px; }
+  .case-study-inner { grid-template-columns: 1fr; gap: 40px; }
+  .about-visual { max-width: 100%; }
+  .hero-stats { gap: 32px; }
+  footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; }
+  .services-header { flex-direction: column; align-items: flex-start; }
+  .form-row { grid-template-columns: 1fr; }
+  .process-steps { grid-template-columns: 1fr; }
+  .process-step { border-left: none; border-top: 1px solid var(--border); }
+  .process-step:first-child { border-top: none; }
+  .case-metrics { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 480px) {
+  h1 { font-size: 40px; }
+  .hero-stats { flex-direction: column; gap: 24px; }
+  .case-metrics { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── MOBILE MENU ─────────────────────────────────── -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services"   onclick="closeMobile()">Services</a>
+  <a href="#case-study" onclick="closeMobile()">Results</a>
+  <a href="#about"      onclick="closeMobile()">About</a>
+  <a href="#contact" class="mobile-cta" onclick="closeMobile()">Book a Call</a>
+</div>
+
+<!-- ── NAV ────────────────────────────────────────── -->
+<nav id="navbar">
+  <a href="#home" class="nav-logo">BLAZ<span>O</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#case-study">Results</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact" class="nav-cta">Book a Call</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ── HERO ───────────────────────────────────────── -->
+<section id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Southern California Tech Consulting</div>
+    <h1>
+      We make<br/>
+      local business<br/>
+      <span class="accent">unstoppable.</span>
+    </h1>
+    <p class="hero-sub">
+      BLAZO builds the websites, automations, and tech infrastructure that help SoCal businesses stop losing leads, wasting time, and leaving money on the table — fast.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Book Free Discovery Call</a>
+      <a href="#services" class="btn-secondary">See What We Do →</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">10<span>+</span></div>
+        <div class="stat-label">Hours saved per client, per week</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">3<span>x</span></div>
+        <div class="stat-label">Faster lead response time</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">$500</div>
+        <div class="stat-label">Starting project price</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MARQUEE ─────────────────────────────────────── -->
+<div class="marquee-section">
+  <div class="marquee-track">
+    <span class="marquee-item">Web Design <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Workflow Automation <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Lead Capture Systems <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Tech Strategy <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">CRM Integration <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Digital Presence <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">SoCal Focused <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Web Design <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Workflow Automation <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Lead Capture Systems <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Tech Strategy <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">CRM Integration <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Digital Presence <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">SoCal Focused <span class="marquee-dot">✦</span></span>
+  </div>
+</div>
+
+<!-- ── SERVICES ───────────────────────────────────── -->
+<section id="services">
+  <div class="services-header reveal">
+    <div>
+      <span class="section-label">What We Do</span>
+      <h2>Tech that<br/>actually works.</h2>
+    </div>
+    <p class="section-sub">No fluff. No bloated retainers. Just targeted solutions that move the needle for your business.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-num">01</div>
+      <span class="service-icon">⚡</span>
+      <div class="service-title">Web Design & Development</div>
+      <p class="service-desc">Fast, modern websites built to convert visitors into clients. Mobile-first, SEO-ready, and designed to make your business look like it means business.</p>
+      <div class="service-tags">
+        <span class="service-tag">Custom Design</span>
+        <span class="service-tag">Mobile Optimized</span>
+        <span class="service-tag">SEO Ready</span>
+        <span class="service-tag">Fast Load</span>
+      </div>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <div class="service-num">02</div>
+      <span class="service-icon">🔄</span>
+      <div class="service-title">Workflow Automation</div>
+      <p class="service-desc">Stop doing manually what a system can do for you. We automate lead intake, follow-ups, scheduling, and internal processes — so your team focuses on what matters.</p>
+      <div class="service-tags">
+        <span class="service-tag">Lead Intake</span>
+        <span class="service-tag">Follow-Up Sequences</span>
+        <span class="service-tag">CRM Integration</span>
+        <span class="service-tag">Scheduling</span>
+      </div>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-num">03</div>
+      <span class="service-icon">🧠</span>
+      <div class="service-title">Full Tech Consulting</div>
+      <p class="service-desc">Not sure where to start? We audit your entire tech stack, identify what's costing you time and money, and build a roadmap to fix it — then execute it.</p>
+      <div class="service-tags">
+        <span class="service-tag">Tech Audit</span>
+        <span class="service-tag">Stack Strategy</span>
+        <span class="service-tag">Implementation</span>
+        <span class="service-tag">Ongoing Support</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CASE STUDY ──────────────────────────────────── -->
+<section id="case-study">
+  <div class="case-study-inner">
+    <div class="case-study-content reveal">
+      <div class="case-study-label">Real Results</div>
+      <span class="section-label">Proof of Concept</span>
+      <h2>From 10 hours of manual work to zero.</h2>
+      <p>A New Jersey law firm was manually reviewing every incoming lead — printing emails, sorting by hand, and following up days late. Potential clients were slipping through the cracks daily.</p>
+      <p>We built an automated lead intake system that captures, categorizes, and routes every inquiry the moment it comes in. The team stopped chasing leads and started closing them.</p>
+      <div class="case-metrics reveal reveal-delay-1">
+        <div class="metric-box">
+          <div class="metric-num">10<span>+</span></div>
+          <div class="metric-desc">Hours saved per week on manual lead review</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-num">3<span>x</span></div>
+          <div class="metric-desc">Faster response time to incoming inquiries</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-num">0</div>
+          <div class="metric-desc">Leads dropped due to manual sorting errors</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-num">30<span>d</span></div>
+          <div class="metric-desc">From first call to fully live system</div>
+        </div>
+      </div>
+    </div>
+    <div class="case-visual reveal reveal-delay-2">
+      <div style="font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--blaze);margin-bottom:20px;">How the system works</div>
+      <div class="flow-step">
+        <div class="flow-step-icon">📬</div>
+        <div>
+          <div class="flow-step-label">Step 1 — Capture</div>
+          <div class="flow-step-desc">Lead submits inquiry via web form or email — instantly captured and logged.</div>
+        </div>
+      </div>
+      <div class="flow-connector"></div>
+      <div class="flow-step">
+        <div class="flow-step-icon">🏷️</div>
+        <div>
+          <div class="flow-step-label">Step 2 — Categorize</div>
+          <div class="flow-step-desc">System tags by case type, urgency, and source. No manual sorting.</div>
+        </div>
+      </div>
+      <div class="flow-connector"></div>
+      <div class="flow-step">
+        <div class="flow-step-icon">📤</div>
+        <div>
+          <div class="flow-step-label">Step 3 — Route</div>
+          <div class="flow-step-desc">Right person gets the right lead, immediately. CRM updated automatically.</div>
+        </div>
+      </div>
+      <div class="flow-connector"></div>
+      <div class="flow-step">
+        <div class="flow-step-icon">🔁</div>
+        <div>
+          <div class="flow-step-label">Step 4 — Follow Up</div>
+          <div class="flow-step-desc">Automated reminder sequences fire if no response in 24 hours.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROCESS ─────────────────────────────────────── -->
+<div class="process-section">
+  <div class="process-header reveal">
+    <span class="section-label">How It Works</span>
+    <h2>From audit to results<br/>in weeks, not months.</h2>
+    <p class="section-sub">We move fast. Most clients see measurable changes within the first 30 days.</p>
+  </div>
+  <div class="process-steps">
+    <div class="process-step reveal">
+      <div class="step-num">01</div>
+      <div class="step-title">Discovery Call</div>
+      <p class="step-desc">15 minutes. We learn your business, identify your biggest tech gaps, and see if we're the right fit.</p>
+    </div>
+    <div class="process-step reveal reveal-delay-1">
+      <div class="step-num">02</div>
+      <div class="step-title">Tech Audit</div>
+      <p class="step-desc">We review your website, workflows, tools, and digital presence. You get a clear picture of what's holding you back.</p>
+    </div>
+    <div class="process-step reveal reveal-delay-2">
+      <div class="step-num">03</div>
+      <div class="step-title">Custom Roadmap</div>
+      <p class="step-desc">A prioritized plan built around your budget and goals. No guesswork — just a clear path to results.</p>
+    </div>
+    <div class="process-step reveal reveal-delay-3">
+      <div class="step-num">04</div>
+      <div class="step-title">We Build & Launch</div>
+      <p class="step-desc">We execute the plan — fast. Websites, automations, integrations. You stay focused on running your business.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── ABOUT ───────────────────────────────────────── -->
+<section id="about">
+  <div class="about-visual reveal">
+    <div class="about-box about-box-main">BLAZO</div>
+    <div class="about-box about-box-accent">Built in<br/>Southern<br/>California</div>
+    <div class="about-badge">
+      <strong>100%</strong>
+      Results-focused
+    </div>
+  </div>
+  <div class="about-content reveal reveal-delay-1">
+    <span class="section-label">About BLAZO</span>
+    <h2>We're not an agency.<br/>We're your tech team.</h2>
+    <p class="about-text">
+      BLAZO was built because too many great Southern California businesses are losing leads, wasting time, and leaving money on the table — not because they're bad at what they do, but because their tech is letting them down.
+    </p>
+    <p class="about-text">
+      We started by automating a law firm's entire lead review process, saving them 10+ hours a week and tripling their response rate. Now we're bringing that same thinking to every local business in SoCal.
+    </p>
+    <ul class="about-list">
+      <li>Deep focus on Southern California businesses</li>
+      <li>Transparent pricing — no hidden fees</li>
+      <li>Fast execution — results in weeks, not months</li>
+      <li>End-to-end: strategy, build, and support</li>
+    </ul>
+    <a href="#contact" class="btn-primary">Work With Us</a>
+  </div>
+</section>
+
+<!-- ── CONTACT ─────────────────────────────────────── -->
+<!--
+  FORM SETUP:
+  1. Create a free account at formspree.io
+  2. Create a new form and copy your form ID
+  3. Replace YOUR_FORM_ID below with your actual ID (e.g. xpwzgkqb)
+  4. Update the email/social links in .contact-methods below
+-->
+<section id="contact">
+  <div class="contact-info reveal">
+    <span class="section-label">Get In Touch</span>
+    <h2>Ready to stop<br/>leaving money<br/>on the table?</h2>
+    <p class="section-sub">Book a free 15-minute discovery call. No pitch, no pressure — just an honest conversation about what's possible for your business.</p>
+    <div class="contact-methods">
+      <!-- UPDATE: Replace with your real email -->
+      <a href="mailto:hello@blazo.co" class="contact-method">
+        <div class="contact-method-icon">✉️</div>
+        <div>
+          <div class="contact-method-label">Email</div>
+          <div class="contact-method-value">hello@blazo.co</div>
+        </div>
+      </a>
+      <!-- UPDATE: Replace with your real Instagram handle -->
+      <a href="https://instagram.com/blazo.co" target="_blank" rel="noopener" class="contact-method">
+        <div class="contact-method-icon">📷</div>
+        <div>
+          <div class="contact-method-label">Instagram</div>
+          <div class="contact-method-value">@blazo.co</div>
+        </div>
+      </a>
+      <!-- UPDATE: Replace with your real LinkedIn URL -->
+      <a href="https://linkedin.com/in/YOUR_HANDLE" target="_blank" rel="noopener" class="contact-method">
+        <div class="contact-method-icon" style="font-size:13px;font-weight:800;font-family:'Syne',sans-serif;color:#0077b5;">in</div>
+        <div>
+          <div class="contact-method-label">LinkedIn</div>
+          <div class="contact-method-value">linkedin.com/in/blazo</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="contact-form reveal reveal-delay-1">
+    <div class="form-title">Book a Discovery Call</div>
+    <p class="form-sub">15 minutes. Free. No commitment.</p>
+
+    <!-- Formspree form — replace YOUR_FORM_ID -->
+    <form id="contactForm" action="https://formspree.io/f/xaqkezvv" method="POST">
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" name="first_name" placeholder="John" required />
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" name="last_name" placeholder="Smith" required />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Business Name</label>
+        <input type="text" name="business_name" placeholder="Smith & Associates" required />
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" name="email" placeholder="john@smithlaw.com" required />
+      </div>
+      <div class="form-group">
+        <label>Phone (optional)</label>
+        <input type="tel" name="phone" placeholder="(310) 555-0123" />
+      </div>
+      <div class="form-group">
+        <label>What's your biggest tech challenge?</label>
+        <select name="challenge" required>
+          <option value="" disabled selected>Select one</option>
+          <option>My website is outdated or non-existent</option>
+          <option>I'm doing too many things manually</option>
+          <option>I'm losing leads and don't know why</option>
+          <option>I need a full tech strategy</option>
+          <option>Something else</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Anything else?</label>
+        <textarea name="message" placeholder="Tell us a bit about your business and what you're hoping to fix..."></textarea>
+      </div>
+      <button type="submit" class="submit-btn" id="submitBtn">Book My Free Call →</button>
+    </form>
+    <div class="form-success" id="formSuccess">
+      Request received — we'll be in touch within 24 hours to confirm your call time.
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ──────────────────────────────────────── -->
+<footer>
+  <div class="footer-logo">BLAZ<span>O</span></div>
+  <div class="footer-copy">© 2025 BLAZO. Southern California.</div>
+  <div class="footer-links">
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<script>
+// ── NAV SCROLL ──────────────────────────────────────
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// ── MOBILE MENU ─────────────────────────────────────
+function toggleMenu() {
+  const menu = document.getElementById('mobileMenu');
+  const btn  = document.getElementById('hamburger');
+  menu.classList.toggle('open');
+  btn.classList.toggle('open');
+  document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+}
+
+function closeMobile() {
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ── SCROLL REVEAL ────────────────────────────────────
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ── FORM SUBMIT (Formspree async) ────────────────────
+document.getElementById('contactForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn  = document.getElementById('submitBtn');
+  const form = e.target;
+
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+
+  try {
+    const res = await fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { Accept: 'application/json' },
+    });
+
+    if (res.ok) {
+      form.style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+    } else {
+      btn.disabled = false;
+      btn.textContent = 'Book My Free Call →';
+      alert('Something went wrong. Email us directly at hello@blazo.co');
+    }
+  } catch {
+    btn.disabled = false;
+    btn.textContent = 'Book My Free Call →';
+    alert('Something went wrong. Email us directly at hello@blazo.co');
+  }
+});
+</script>
+
+</body>
+</html>
