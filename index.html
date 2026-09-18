@@ -27,14 +27,6 @@
 html { scroll-behavior: smooth; }
 body { background: var(--dark); color: var(--light); font-family: 'Inter', sans-serif; overflow-x: hidden; }
 
-/* ── SCROLL ANIMATIONS ── */
-.reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
-.reveal.visible { opacity: 1; transform: translateY(0); }
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.3s; }
-.reveal-delay-4 { transition-delay: 0.4s; }
-
 /* ── NAV ── */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 200;
@@ -85,18 +77,6 @@ h1 .accent { color: var(--blaze); }
 .btn-secondary { padding: 16px 32px; background: transparent; color: var(--light); border: 1px solid var(--border2); border-radius: 6px; font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-block; transition: border-color 0.2s; }
 .btn-secondary:hover { border-color: rgba(240,237,232,0.35); }
 
-.hero-stats { display: flex; gap: 56px; margin-top: 72px; flex-wrap: wrap; animation: fadeUp 0.8s 0.4s ease both; padding-top: 40px; border-top: 1px solid var(--border); }
-.stat-num { font-family: 'Syne', sans-serif; font-size: 38px; font-weight: 800; color: var(--light); line-height: 1; }
-.stat-num span { color: var(--blaze); }
-.stat-label { color: var(--muted); font-size: 13px; margin-top: 6px; }
-
-/* ── MARQUEE ── */
-.marquee-section { padding: 18px 0; overflow: hidden; background: var(--dark2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-.marquee-track { display: flex; animation: marquee 22s linear infinite; white-space: nowrap; }
-.marquee-item { display: inline-flex; align-items: center; gap: 16px; padding: 0 40px; font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
-.marquee-dot { color: var(--blaze); font-size: 16px; }
-@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
 /* ── SECTIONS COMMON ── */
 section { padding: 100px 48px; }
 .section-label { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blaze); margin-bottom: 16px; }
@@ -125,12 +105,6 @@ h2 { font-family: 'Syne', sans-serif; font-size: clamp(34px, 5vw, 54px); font-we
 .case-study-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; max-width: 1100px; margin: 0 auto; }
 .case-study-label { display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px; background: rgba(255,77,0,0.08); border: 1px solid rgba(255,77,0,0.2); border-radius: 100px; font-size: 11px; font-weight: 600; color: var(--blaze2); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 20px; }
 .case-study-content p { font-size: 16px; line-height: 1.8; color: var(--muted); font-weight: 300; margin-bottom: 14px; }
-.case-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 12px; }
-.metric-box { background: var(--dark2); padding: 28px 24px; border: 1px solid var(--border); }
-.metric-box:first-child  { border-top-left-radius: 8px; }
-.metric-box:nth-child(2) { border-top-right-radius: 8px; }
-.metric-box:nth-child(3) { border-bottom-left-radius: 8px; }
-.metric-box:last-child   { border-bottom-right-radius: 8px; }
 .metric-num { font-family: 'Syne', sans-serif; font-size: 36px; font-weight: 800; color: var(--light); line-height: 1; }
 .metric-num span { color: var(--blaze); }
 .metric-desc { font-size: 13px; color: var(--muted); margin-top: 6px; line-height: 1.5; }
@@ -161,8 +135,6 @@ h2 { font-family: 'Syne', sans-serif; font-size: clamp(34px, 5vw, 54px); font-we
 .about-box { position: absolute; border-radius: 4px; }
 .about-box-main { inset: 0; background: var(--dark3); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-size: 112px; font-weight: 800; color: rgba(255,77,0,0.07); letter-spacing: -0.04em; overflow: hidden; user-select: none; }
 .about-box-accent { width: 140px; height: 140px; bottom: -20px; right: -20px; background: linear-gradient(135deg, var(--blaze), var(--blaze2)); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: #fff; text-align: center; line-height: 1.4; padding: 16px; }
-.about-badge { position: absolute; top: -16px; left: -16px; background: var(--dark); border: 1px solid var(--border2); border-radius: 10px; padding: 14px 18px; font-size: 13px; color: var(--light); }
-.about-badge strong { display: block; font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: var(--blaze); }
 .about-content h2 { margin-bottom: 24px; }
 .about-text { font-size: 16px; line-height: 1.8; color: var(--muted); margin-bottom: 16px; font-weight: 300; }
 .about-list { list-style: none; margin: 28px 0; display: flex; flex-direction: column; gap: 12px; }
@@ -215,20 +187,17 @@ footer { padding: 40px 48px; border-top: 1px solid var(--border); display: flex;
   #about, #contact { grid-template-columns: 1fr; gap: 48px; padding: 72px 24px; }
   .case-study-inner { grid-template-columns: 1fr; gap: 48px; }
   .about-visual { display: none; }
-  .hero-stats { gap: 32px; padding-top: 32px; }
   .services-header { flex-direction: column; align-items: flex-start; }
   .form-row { grid-template-columns: 1fr; }
   .process-steps { grid-template-columns: 1fr; }
   .process-step { border-left: none; border-top: 1px solid var(--border); }
   .process-step:first-child { border-top: none; }
-  .case-metrics { grid-template-columns: 1fr 1fr; }
   footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; }
 }
 
 @media (max-width: 480px) {
   h1 { font-size: 40px; line-height: 1; }
   .hero-sub { font-size: 16px; }
-  .hero-stats { flex-direction: column; gap: 20px; }
   .btn-primary, .btn-secondary { width: 100%; text-align: center; padding: 14px 24px; }
   .hero-actions { flex-direction: column; }
   .contact-form { padding: 28px 20px; }
@@ -240,7 +209,7 @@ footer { padding: 40px 48px; border-top: 1px solid var(--border); display: flex;
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
   <a href="#services"   onclick="closeMobile()">Services</a>
-  <a href="#case-study" onclick="closeMobile()">Results</a>
+  <a href="#case-study" onclick="closeMobile()">The System</a>
   <a href="#about"      onclick="closeMobile()">About</a>
   <a href="#contact" class="mobile-cta" onclick="closeMobile()">Book a Call</a>
 </div>
@@ -250,7 +219,7 @@ footer { padding: 40px 48px; border-top: 1px solid var(--border); display: flex;
   <a href="#home" class="nav-logo">BLAZ<span>O</span></a>
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
-    <li><a href="#case-study">Results</a></li>
+    <li><a href="#case-study">The System</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#contact" class="nav-cta">Book a Call</a></li>
   </ul>
@@ -277,46 +246,12 @@ footer { padding: 40px 48px; border-top: 1px solid var(--border); display: flex;
       <a href="#contact" class="btn-primary">Book a Free Call</a>
       <a href="#services" class="btn-secondary">See What We Do</a>
     </div>
-    <div class="hero-stats">
-      <div class="stat-item">
-        <div class="stat-num">10<span>+</span></div>
-        <div class="stat-label">Hours saved per client, per week</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">3<span>x</span></div>
-        <div class="stat-label">Faster lead response time</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">$500</div>
-        <div class="stat-label">Starting project price</div>
-      </div>
-    </div>
   </div>
 </section>
 
-<!-- MARQUEE -->
-<div class="marquee-section">
-  <div class="marquee-track">
-    <span class="marquee-item">Automation <span class="marquee-dot">✦</span></span>
-    <span class="marquee-item">Systems Setup <span class="marquee-dot">✦</span></span>
-    <span class="marquee-item">Web Design <span class="marquee-dot">✦</span></span>
-    <span class="marquee-item">Digital Presence <span class="marquee-dot">✦</span></span>
-    <span class="marquee-item">Analytics <span class="marquee-dot">✦</span></span>
-    <span class="marquee-item">CRM Integration <span class="marquee-dot">✦</span></span>
-    <span class="marquee-item">SoCal Focused <span class="marquee-dot">✦</span></span>
-    <span class="marquee-item">Automation <span class="marquee-dot">✦</span></span>
-    <span class="marquee-item">Systems Setup <span class="marquee-dot">✦</span></span>
-    <span class="marquee-item">Web Design <span class="marquee-dot">✦</span></span>
-    <span class="marquee-item">Digital Presence <span class="marquee-dot">✦</span></span>
-    <span class="marquee-item">Analytics <span class="marquee-dot">✦</span></span>
-    <span class="marquee-item">CRM Integration <span class="marquee-dot">✦</span></span>
-    <span class="marquee-item">SoCal Focused <span class="marquee-dot">✦</span></span>
-  </div>
-</div>
-
 <!-- SERVICES -->
 <section id="services">
-  <div class="services-header reveal">
+  <div class="services-header">
     <div>
       <span class="section-label">Services</span>
       <h2>What we build.</h2>
@@ -325,7 +260,7 @@ footer { padding: 40px 48px; border-top: 1px solid var(--border); display: flex;
   </div>
   <div class="services-grid">
 
-    <div class="service-card reveal">
+    <div class="service-card">
       <div class="service-num">01</div>
       <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
         <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>
@@ -341,7 +276,7 @@ footer { padding: 40px 48px; border-top: 1px solid var(--border); display: flex;
       </div>
     </div>
 
-    <div class="service-card reveal reveal-delay-1">
+    <div class="service-card">
       <div class="service-num">02</div>
       <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
         <polygon points="12 2 2 7 12 12 22 7 12 2"/>
@@ -358,7 +293,7 @@ footer { padding: 40px 48px; border-top: 1px solid var(--border); display: flex;
       </div>
     </div>
 
-    <div class="service-card reveal reveal-delay-2">
+    <div class="service-card">
       <div class="service-num">03</div>
       <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="12" cy="12" r="10"/>
@@ -375,7 +310,7 @@ footer { padding: 40px 48px; border-top: 1px solid var(--border); display: flex;
       </div>
     </div>
 
-    <div class="service-card reveal">
+    <div class="service-card">
       <div class="service-num">04</div>
       <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
         <line x1="18" y1="20" x2="18" y2="10"/>
@@ -393,7 +328,7 @@ footer { padding: 40px 48px; border-top: 1px solid var(--border); display: flex;
       </div>
     </div>
 
-    <div class="service-card reveal reveal-delay-1">
+    <div class="service-card">
       <div class="service-num">05</div>
       <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
         <rect x="2" y="3" width="20" height="14" rx="2"/>
@@ -415,32 +350,14 @@ footer { padding: 40px 48px; border-top: 1px solid var(--border); display: flex;
 <!-- CASE STUDY -->
 <section id="case-study">
   <div class="case-study-inner">
-    <div class="case-study-content reveal">
-      <div class="case-study-label">Real Results</div>
-      <h2>From 10 hours of manual work to zero.</h2>
-      <p>A growing service firm had the same problem most local businesses do: every new lead required manual review, routing, and follow-up. With a team focused on client work, things slipped through.</p>
-      <p>We replaced that process with a fully automated intake system. Every inquiry gets captured, tagged, and routed instantly. No more manual sorting, no more missed follow-ups.</p>
-      <div class="case-metrics reveal reveal-delay-1">
-        <div class="metric-box">
-          <div class="metric-num">10<span>+</span></div>
-          <div class="metric-desc">Hours saved per week on lead management</div>
-        </div>
-        <div class="metric-box">
-          <div class="metric-num">3<span>x</span></div>
-          <div class="metric-desc">Faster response time to new inquiries</div>
-        </div>
-        <div class="metric-box">
-          <div class="metric-num">0</div>
-          <div class="metric-desc">Leads dropped due to manual error</div>
-        </div>
-        <div class="metric-box">
-          <div class="metric-num">30<span>d</span></div>
-          <div class="metric-desc">From first call to fully live system</div>
-        </div>
-      </div>
+    <div class="case-study-content">
+      <div class="case-study-label">The Method</div>
+      <h2>From manual chaos to a system that runs itself.</h2>
+      <p>Most local businesses run into the same problem: every new lead requires manual review, routing, and follow-up. With a small team focused on client work, things slip through the cracks.</p>
+      <p>We replace that process with a fully automated intake system. Every inquiry gets captured, tagged, and routed instantly — no manual sorting, no missed follow-ups.</p>
     </div>
 
-    <div class="case-visual reveal reveal-delay-2">
+    <div class="case-visual">
       <div style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--blaze);margin-bottom:20px;">How the system works</div>
 
       <div class="flow-step">
@@ -492,7 +409,7 @@ footer { padding: 40px 48px; border-top: 1px solid var(--border); display: flex;
         </div>
         <div>
           <div class="flow-step-label">Follow Up</div>
-          <div class="flow-step-desc">Automated reminders fire if there's no response within 24 hours.</div>
+          <div class="flow-step-desc">Automated reminders fire if there's no response in time.</div>
         </div>
       </div>
     </div>
@@ -501,28 +418,28 @@ footer { padding: 40px 48px; border-top: 1px solid var(--border); display: flex;
 
 <!-- PROCESS -->
 <div class="process-section">
-  <div class="process-header reveal">
+  <div class="process-header">
     <span class="section-label">How It Works</span>
     <h2>How every engagement works.</h2>
     <p class="section-sub">Whether you know exactly what you need or just know something's off, we always start here.</p>
   </div>
   <div class="process-steps">
-    <div class="process-step reveal">
+    <div class="process-step">
       <div class="step-num">01</div>
       <div class="step-title">Tech Overview Call</div>
       <p class="step-desc">A free 15-minute call to understand your business, your current setup, and where things feel broken. No assumptions, no pitch.</p>
     </div>
-    <div class="process-step reveal reveal-delay-1">
+    <div class="process-step">
       <div class="step-num">02</div>
       <div class="step-title">Assessment</div>
       <p class="step-desc">We dig into your website, tools, and workflows to find what's actually holding you back — not just what's visible on the surface.</p>
     </div>
-    <div class="process-step reveal reveal-delay-2">
+    <div class="process-step">
       <div class="step-num">03</div>
       <div class="step-title">Recommendations</div>
       <p class="step-desc">You get a prioritized list of what to fix, in what order, and what it costs. Specific steps, realistic timelines, no guesswork.</p>
     </div>
-    <div class="process-step reveal reveal-delay-3">
+    <div class="process-step">
       <div class="step-num">04</div>
       <div class="step-title">We Build It</div>
       <p class="step-desc">We execute — whatever that looks like. A new site, a CRM, automated workflows. You stay focused on your clients.</p>
@@ -532,15 +449,11 @@ footer { padding: 40px 48px; border-top: 1px solid var(--border); display: flex;
 
 <!-- ABOUT -->
 <section id="about">
-  <div class="about-visual reveal">
+  <div class="about-visual">
     <div class="about-box about-box-main">BLAZO</div>
     <div class="about-box about-box-accent">Built in<br/>Southern<br/>California</div>
-    <div class="about-badge">
-      <strong>100%</strong>
-      Results-focused
-    </div>
   </div>
-  <div class="about-content reveal reveal-delay-1">
+  <div class="about-content">
     <span class="section-label">About BLAZO</span>
     <h2>We're not an agency.<br/>We're your tech team.</h2>
     <p class="about-text">
@@ -561,7 +474,7 @@ footer { padding: 40px 48px; border-top: 1px solid var(--border); display: flex;
 
 <!-- CONTACT -->
 <section id="contact">
-  <div class="contact-info reveal">
+  <div class="contact-info">
     <span class="section-label">Get In Touch</span>
     <h2>Ready to build<br/>something that<br/>actually works?</h2>
     <p class="section-sub">Book a free 15-minute tech overview. We'll look at where your business stands and what it would take to get it where you want.</p>
@@ -609,7 +522,7 @@ footer { padding: 40px 48px; border-top: 1px solid var(--border); display: flex;
     </div>
   </div>
 
-  <div class="contact-form reveal reveal-delay-1">
+  <div class="contact-form">
     <div class="form-title">Book a Tech Overview</div>
     <p class="form-sub">15 minutes. Free. No commitment.</p>
     <form id="contactForm" action="https://formspree.io/f/xaqkezvv" method="POST">
@@ -662,7 +575,7 @@ footer { padding: 40px 48px; border-top: 1px solid var(--border); display: flex;
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">BLAZ<span>O</span></div>
-  <div class="footer-copy">© 2025 BLAZO. Southern California.</div>
+  <div class="footer-copy">© 2026 BLAZO. Southern California.</div>
   <div class="footer-links">
     <a href="#services">Services</a>
     <a href="#about">About</a>
@@ -688,13 +601,6 @@ function closeMobile() {
   document.getElementById('hamburger').classList.remove('open');
   document.body.style.overflow = '';
 }
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
-  });
-}, { threshold: 0.12 });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 document.getElementById('contactForm').addEventListener('submit', async (e) => {
   e.preventDefault();
